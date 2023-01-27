@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    build: ./
+    ports:
+      - '9090:9090'
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/Cloud_Storage
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+
+  database:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: Cloud_Storage
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
