@@ -2,7 +2,6 @@ package com.example.storage.services;
 
 import com.example.storage.dto.AuthRequest;
 import com.example.storage.security.JwtTokenUtils;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,11 +14,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtils jwtTokenUtils;
     private final Map<String, String> tokenStore = new HashMap<>();
+
+    public AuthService(AuthenticationManager authenticationManager, JwtTokenUtils jwtTokenUtils) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenUtils = jwtTokenUtils;
+    }
 
     public String loginUser(AuthRequest authRequest) {
         try {
